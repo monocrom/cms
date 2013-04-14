@@ -1,0 +1,13 @@
+<ul>
+{% for page in pages %}
+    <li>{{ page.title }}
+        <ul>
+            {% for site in page.sites %}
+                <li>{{ site.name }}</li>
+            {% endfor %}
+            <li><a href="{{ link('site_new', page) }}">create site</a></li>
+        </ul>
+    </li>
+    <li><a href="{{ link('page_new') }}">create page</a></li>
+{% endfor %}
+</ul>

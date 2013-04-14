@@ -1,3 +1,20 @@
+cms_index:
+  pattern:  /cms
+  defaults: { _controller: 'CmsBundle:Cms:index' }
+
+nest_rest:
+  pattern:  /{nested_entity}/{nested_id}/{entity}/{action}/{id}
+  defaults: { _controller: 'CmsBundle:Rest:nestedForward', id: null }
+
+rest:
+  pattern:  /{entity}/{action}/{id}
+  defaults: { _controller: 'CmsBundle:Rest:forward', id: null }
+
 home:
   pattern:  /
   defaults: { _controller: 'CmsBundle:Home:index' }
+
+#for internal route generation
+page_show:
+  pattern:  /
+  defaults: { _controller: 'CmsBundle:Page:show' }

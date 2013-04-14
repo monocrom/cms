@@ -1,0 +1,31 @@
+services:
+  dragnic.cmsbundle.page:
+    class:     Dragnic\CmsBundle\Service\Page
+    arguments: [@doctrine.orm.default_entity_manager]
+
+  dragnic.cmsbundle.twig_string:
+    class:     %twig.class%
+    arguments: [@dragnic.cmsbundle.twig_string_loader, %twig.options%]
+
+  dragnic.cmsbundle.twig_string_loader:
+    class:  Twig_Loader_String
+
+  dragnic.cmsbundle.twig_file:
+    class:     %twig.class%
+    arguments: [@dragnic.cmsbundle.twig_file_loader, %twig.options%]
+
+  dragnic.cmsbundle.twig_file_loader:
+    class:  Twig_Loader_Filesystem
+    arguments: [%dragnic.cmsbundle.twig_filter_loader.basedir%]
+
+  dragnic.rest_extension:
+    class:     Dragnic\CmsBundle\Twig\RestTwigExtension
+    arguments: [@dragnic.rest.router]
+    tags:      [{ name: twig.extension }]
+
+  dragnic.rest.router:
+    class:     Dragnic\CmsBundle\Rest\RestRouter
+    arguments: [@router]
+
+parameters:
+  dragnic.cmsbundle.twig_filter_loader.basedir: %kernel.root_dir%/../src/Dragnic/CmsBundle/Resources/views/BaseLayout
